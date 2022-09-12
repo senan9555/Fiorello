@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\99450\\Desktop\\Project\\Fiorello\\Fiorello\\Fiorello.csproj": {}
+    "C:\\Users\\99450\\Desktop\\Fiorello\\Fiorello\\Fiorello\\Fiorello.csproj": {}
   },
   "projects": {
-    "C:\\Users\\99450\\Desktop\\Project\\Fiorello\\Fiorello\\Fiorello.csproj": {
+    "C:\\Users\\99450\\Desktop\\Fiorello\\Fiorello\\Fiorello\\Fiorello.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\99450\\Desktop\\Project\\Fiorello\\Fiorello\\Fiorello.csproj",
+        "projectUniqueName": "C:\\Users\\99450\\Desktop\\Fiorello\\Fiorello\\Fiorello\\Fiorello.csproj",
         "projectName": "Fiorello",
-        "projectPath": "C:\\Users\\99450\\Desktop\\Project\\Fiorello\\Fiorello\\Fiorello.csproj",
+        "projectPath": "C:\\Users\\99450\\Desktop\\Fiorello\\Fiorello\\Fiorello\\Fiorello.csproj",
         "packagesPath": "C:\\Users\\99450\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\99450\\Desktop\\Project\\Fiorello\\Fiorello\\obj\\",
+        "outputPath": "C:\\Users\\99450\\Desktop\\Fiorello\\Fiorello\\Fiorello\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\99450\\AppData\\Roaming\\NuGet\\NuGet.Config",
