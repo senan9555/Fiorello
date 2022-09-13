@@ -307,3 +307,9 @@ C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\ref\Fiorello.
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Index.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Create.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Category\Update.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs

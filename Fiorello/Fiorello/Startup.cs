@@ -1,7 +1,9 @@
 using Fiorello.DAL;
+using Fiorello.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,16 @@ namespace Fiorello
             {
                 option.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
+            services.AddIdentity<AppUser, IdentityRole>(IdentityOption =>
+            {
+                IdentityOption.Password.RequiredLength = 8;
+                IdentityOption.Password.RequireNonAlphanumeric = false;
+                IdentityOption.User.RequireUniqueEmail = true;
+                IdentityOption.Lockout.MaxFailedAccessAttempts = 5;
+                IdentityOption.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+                
+            })
+                .AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

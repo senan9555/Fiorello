@@ -21,7 +21,7 @@ namespace Fiorello.Areas.Admin.Controllers
             _env = env;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             List<Product> products = await _db.Products.Include(x=>x.Category).ToListAsync();
             return View(products);
@@ -77,7 +77,7 @@ namespace Fiorello.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Product dbProduct = await _db.Products.FirstOrDefaultAsync(x => x.Id == id);
+            Product dbProduct = await _db.Products.Include(x=>x.ProductDetail).FirstOrDefaultAsync(x => x.Id == id);
             if (dbProduct == null)
             {
                 return BadRequest();
@@ -95,7 +95,7 @@ namespace Fiorello.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Product dbProduct = await _db.Products.FirstOrDefaultAsync(x => x.Id == id);
+            Product dbProduct = await _db.Products.Include(x=>x.ProductDetail).FirstOrDefaultAsync(x => x.Id == id);
             if (dbProduct == null)
             {
                 return BadRequest();
@@ -131,6 +131,7 @@ namespace Fiorello.Areas.Admin.Controllers
             dbProduct.CategoryId = categoryId;
             dbProduct.Name = product.Name;
             dbProduct.Price = product.Price;
+            dbProduct.ProductDetail.Description = product.ProductDetail.Description;
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
