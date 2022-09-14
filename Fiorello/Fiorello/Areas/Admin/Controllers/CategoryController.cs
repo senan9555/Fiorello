@@ -1,13 +1,16 @@
 ﻿using Fiorello.DAL;
 using Fiorello.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static Fiorello.Helpers.Helper;
 
 namespace Fiorello.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly AppDbContext _db;
@@ -82,7 +85,6 @@ namespace Fiorello.Areas.Admin.Controllers
             }
             dbCategory.Name = category.Name;
             await _db.SaveChangesAsync();
-
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Activity(int? id)
