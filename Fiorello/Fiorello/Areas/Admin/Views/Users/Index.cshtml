@@ -78,7 +78,7 @@
 
                                     <td>
                                         <div class="d-flex justify-content-end">
-                                            <a asp-action="Reset Password" asp-route-id="@item.Id" class="btn btn-warning text-white mx-2 btn-rounded">Reset Password  </a>
+                                            <a asp-action="ResetPassword" asp-route-id="@item.Id" class="btn btn-warning text-white mx-2 btn-rounded">Reset Password  </a>
                                                 <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-success text-white mx-2 btn-rounded">Update</a>
 
                                             @if (item.UserName != User.Identity.Name)
