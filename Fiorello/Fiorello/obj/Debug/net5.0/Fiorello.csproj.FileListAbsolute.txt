@@ -315,3 +315,6 @@ C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\bin\Debug\net5.0\Microsoft.Ext
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Index.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Create.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Update.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\ResetPassword.cshtml.g.cs
