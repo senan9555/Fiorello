@@ -318,3 +318,4 @@ C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\A
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Create.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Update.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\ResetPassword.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Edit.cshtml.g.cs

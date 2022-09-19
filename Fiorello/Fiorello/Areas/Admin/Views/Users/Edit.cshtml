@@ -1,0 +1,41 @@
+﻿@model ChangeRoleVM
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Role</h4>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                   
+                    <div class="form-group">
+                        <label>Change Role</label>
+                    <select class="form-control" name="newRole">
+                        @foreach (string item in Model.Roles)
+                            {
+                                if(Model.Role == item){
+                                    <option selected value="@item">@item</option>
+                                }
+                                else{
+                                    <option value="@item">@item</option>
+                                }
+                                
+                            }
+                    </select>
+                        <label asp-for="UserName">User Name</label>
+                        <input asp-for="UserName" class="form-control">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <a asp-action="Index" class="btn btn-secondary text-white">Go Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+     }

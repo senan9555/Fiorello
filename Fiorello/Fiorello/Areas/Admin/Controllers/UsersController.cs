@@ -53,7 +53,7 @@ namespace Fiorello.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync(RegisterVM register)
+        public async Task<IActionResult> Create(RegisterVM register)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Fiorello.Areas.Admin.Controllers
                 return View();
 
             }
-            await _userManager.AddToRoleAsync(appUser, Helper.Roles.Admin.ToString());
+            await _userManager.AddToRoleAsync(appUser, Helper.Roles.Member.ToString());
             return View();
         }
         public async Task<IActionResult> Activity(string id)
@@ -151,9 +151,9 @@ namespace Fiorello.Areas.Admin.Controllers
                 ModelState.AddModelError("Email", "  email is already exist");
                 return View();
             }
-            user.FullName=updateVM.FullName;
-            user.UserName=updateVM.UserName;
-            user.Email=updateVM.Email;
+            user.FullName = updateVM.FullName;
+            user.UserName = updateVM.UserName;
+            user.Email = updateVM.Email;
 
             await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
@@ -169,12 +169,12 @@ namespace Fiorello.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-            
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(string id,ResetPassword resetPassword)
+        public async Task<IActionResult> ResetPassword(string id, ResetPassword resetPassword)
         {
             if (id == null)
             {
@@ -195,6 +195,70 @@ namespace Fiorello.Areas.Admin.Controllers
                 }
                 return View();
             }
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+            List<string> roles = new List<string>();
+            roles.Add(Helper.Roles.Admin.ToString());
+            roles.Add(Helper.Roles.Member.ToString());
+            string oldRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            ChangeRoleVM changeRole = new ChangeRoleVM
+            {
+                UserName = user.UserName,
+                Role = oldRole,
+                Roles = roles,
+            };
+            return View(changeRole);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id,string newRole)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+            List<string> roles = new List<string>();
+            roles.Add(Helper.Roles.Admin.ToString());
+            roles.Add(Helper.Roles.Member.ToString());
+            string oldRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            ChangeRoleVM changeRole = new ChangeRoleVM
+            {
+                UserName = user.UserName,
+                Role = oldRole,
+                Roles = roles,
+            };
+            IdentityResult addIdentityResult = await _userManager.AddToRoleAsync(user, newRole);
+            if (!addIdentityResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Error");
+                return View(changeRole);
+            };
+            IdentityResult removeIdentityResult = await _userManager.RemoveFromRoleAsync(user, oldRole);
+            if (!removeIdentityResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Error");
+                return View(changeRole);
+            };
+
+
+
             return RedirectToAction("Index");
         }
     }
