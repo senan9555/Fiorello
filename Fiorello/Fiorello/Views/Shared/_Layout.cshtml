@@ -85,9 +85,9 @@
                                 }
                                 <li class="nav-item my-auto search">
                                     <i class="fas fa-search" id="search"></i>
-                                    <ul class="list-unstyled py-3">
+                                    <ul style="height:300px; overflow-y:auto" class="list-unstyled py-3" id="my-list">
                                         <li class="d-flex px-3">
-                                            <input id="input-search" type="text" placeholder="Search">
+                                            <input id="my-search" type="text" placeholder="Search">
                                             <i class="fas fa-search my-auto" id="search"></i>
                                         </li>
 
@@ -323,6 +323,27 @@
     <script src="https://kit.fontawesome.com/e5e249fce2.js" crossorigin="anonymous"></script>
     <script src="~/owlcarousel/owl.carousel.min.js"></script>
     <script src="~/js/script.js"></script>
+    <script>
+
+        $(document).on ("keyup", "#my-search", function () {
+            if($("#my-search").val().length>0){
+               $("#my-list li").slice(1).remove()
+               $.ajax.({
+                   url: "/Home/MySearch/",
+                   type:"get",
+                   data:{
+                    "key": $("#my-search").val()
+                    },
+                   success: function (response) {
+                    $("#my-list").append(response)
+                   }
+               });
+            }
+            else{
+                $("#my-list li").slice(1).remove()
+            }
+        });
+    </script>
    
 </body>
 

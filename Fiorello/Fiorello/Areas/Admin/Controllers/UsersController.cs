@@ -27,6 +27,7 @@ namespace Fiorello.Areas.Admin.Controllers
             _db = db;
         }
 
+        #region Index
         public async Task<IActionResult> Index()
         {
             List<AppUser> users = await _userManager.Users.ToListAsync();
@@ -47,10 +48,19 @@ namespace Fiorello.Areas.Admin.Controllers
             }
             return View(userVMs);
         }
+        #endregion
+
+        #region Create
+
         public IActionResult Create()
         {
             return View();
         }
+        #endregion
+
+        #region Create Post
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RegisterVM register)
@@ -78,6 +88,11 @@ namespace Fiorello.Areas.Admin.Controllers
             await _userManager.AddToRoleAsync(appUser, Helper.Roles.Member.ToString());
             return View();
         }
+        #endregion
+
+        #region Activity
+
+
         public async Task<IActionResult> Activity(string id)
         {
             if (id == null)
@@ -100,6 +115,10 @@ namespace Fiorello.Areas.Admin.Controllers
             await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Update
+
         public async Task<IActionResult> Update(string id)
         {
             if (id == null)
@@ -121,6 +140,10 @@ namespace Fiorello.Areas.Admin.Controllers
             await _userManager.UpdateAsync(user);
             return View(dbUpdateVM);
         }
+        #endregion
+
+        #region Update Post
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(string id, UpdateVM updateVM)
@@ -158,6 +181,10 @@ namespace Fiorello.Areas.Admin.Controllers
             await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Reset Password
+
         public async Task<IActionResult> ResetPassword(string id)
         {
             if (id == null)
@@ -172,6 +199,11 @@ namespace Fiorello.Areas.Admin.Controllers
 
             return View();
         }
+
+        #endregion
+
+        #region Reset Password Post
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(string id, ResetPassword resetPassword)
@@ -197,6 +229,10 @@ namespace Fiorello.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Edit
+
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -220,10 +256,13 @@ namespace Fiorello.Areas.Admin.Controllers
             };
             return View(changeRole);
         }
+        #endregion
+
+        #region Edit Post
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id,string newRole)
+        public async Task<IActionResult> Edit(string id, string newRole)
         {
             if (id == null)
             {
@@ -261,5 +300,7 @@ namespace Fiorello.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+
+        #endregion
     }
 }

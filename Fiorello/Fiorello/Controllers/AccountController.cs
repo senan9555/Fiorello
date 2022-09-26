@@ -19,14 +19,23 @@ namespace Fiorello.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
+
+        #region Register
+
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return NotFound();
+            }
             return View();
         }
+        #endregion
 
+        #region Register Post
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterAsync(RegisterVM register)
+        public async Task<IActionResult> Register(RegisterVM register)
         {
             if (!ModelState.IsValid)
             {
@@ -38,7 +47,7 @@ namespace Fiorello.Controllers
                 Email = register.Email,
                 FullName = register.FullName,
             };
-            IdentityResult identityResult= await _userManager.CreateAsync(appUser,register.Password);
+            IdentityResult identityResult = await _userManager.CreateAsync(appUser, register.Password);
             if (!identityResult.Succeeded)
             {
                 foreach (IdentityError error in identityResult.Errors)
@@ -48,19 +57,38 @@ namespace Fiorello.Controllers
                 return View();
 
             }
-            await _signInManager.SignInAsync(appUser,true);
+            await _signInManager.SignInAsync(appUser, true);
             await _userManager.AddToRoleAsync(appUser, Helper.Roles.Member.ToString());
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
-        public async Task<IActionResult> LogoutAsync()
+        #endregion
+
+        #region Logout
+        public async Task<IActionResult> Logout()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return NotFound();
+            }
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+        #endregion
+
+        #region Login
+
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return NotFound();
+            }
             return View();
         }
+        #endregion
+
+        #region Login Post
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -71,15 +99,15 @@ namespace Fiorello.Controllers
                 return View();
             }
             AppUser user = await _userManager.FindByNameAsync(loginVM.UserName);
-            if(user == null)
+            if (user == null)
             {
-                ModelState.AddModelError("","Login or Password is invalid");
+                ModelState.AddModelError("", "Login or Password is invalid");
             }
             if (user.IsDeactive)
             {
                 ModelState.AddModelError("UserName", "This account has been blocked");
             }
-            Microsoft.AspNetCore.Identity.SignInResult signInResult= await _signInManager.PasswordSignInAsync(user,loginVM.Password,true,true);
+            Microsoft.AspNetCore.Identity.SignInResult signInResult = await _signInManager.PasswordSignInAsync(user, loginVM.Password, true, true);
             if (signInResult.IsLockedOut)
             {
                 ModelState.AddModelError("UserName", "This account has been blocked for 1 min");
@@ -88,8 +116,12 @@ namespace Fiorello.Controllers
             {
                 ModelState.AddModelError("", "Login or Password is invalid");
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+        #endregion
+
+        #region Create Role
+
         //public async Task CreateRole()
         //{
         //    if(!(await _roleManager.RoleExistsAsync(Helper.Roles.Admin.ToString())))
@@ -101,5 +133,6 @@ namespace Fiorello.Controllers
         //        await _roleManager.CreateAsync(new IdentityRole { Name = Helper.Roles.Member.ToString() });
         //    }
         //}
+        #endregion
     }
 }

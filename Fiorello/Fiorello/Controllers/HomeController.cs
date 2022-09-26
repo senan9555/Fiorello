@@ -33,9 +33,14 @@ namespace Fiorello.Controllers
 
         
 
-        public IActionResult Error()
+        public IActionResult MySearch()
         {
             return View();
+        }
+        public async Task<IActionResult> MySearch(string key)
+        {
+            List<Product> products = await _db.Products.Where(x => x.Name.Contains(key)).ToListAsync();
+            return PartialView("_ProductSearchPartial",products);
         }
     }
 }

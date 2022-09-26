@@ -15,6 +15,7 @@ namespace Fiorello.Controllers
         {
             _db = db;
         }
+        #region Index
 
         public async Task<IActionResult> Index()
         {
@@ -25,18 +26,24 @@ namespace Fiorello.Controllers
             };
             return View(homeVM);
         }
-        public async Task<IActionResult> DetailAsync(int? id)
+        #endregion
+
+        #region Detail
+
+        public async Task<IActionResult> Detail(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            Product product = await _db.Products.Include(x=>x.ProductDetail).FirstOrDefaultAsync(x=>x.Id==id);
+            Product product = await _db.Products.Include(x => x.ProductDetail).FirstOrDefaultAsync(x => x.Id == id);
             if (product == null)
             {
                 return NotFound();
             }
+
             return View(product);
         }
+        #endregion
     }
 }

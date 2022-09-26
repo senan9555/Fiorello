@@ -319,3 +319,6 @@ C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\A
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Update.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\ResetPassword.cshtml.g.cs
 C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Users\Edit.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Views\Profile\Index.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Areas\Admin\Views\Profile\Index.cshtml.g.cs
+C:\Users\99450\Desktop\Fiorello\Fiorello\Fiorello\obj\Debug\net5.0\Razor\Views\Shared\_ProductSearchPartial.cshtml.g.cs

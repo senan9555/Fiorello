@@ -24,19 +24,27 @@ namespace Fiorello.Areas.Admin.Controllers
             _env = env;
         }
 
+        #region Index
         public async Task<IActionResult> Index()
         {
-            List<Product> products = await _db.Products.Include(x=>x.Category).ToListAsync();
+            List<Product> products = await _db.Products.Include(x => x.Category).ToListAsync();
             return View(products);
         }
+        #endregion
+
+        #region Create
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await _db.Categories.ToListAsync();
             return View();
         }
+        #endregion
+
+        #region Create Post
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product product,int categoryId)
+        public async Task<IActionResult> Create(Product product, int categoryId)
         {
             ViewBag.Categories = await _db.Categories.ToListAsync();
 
@@ -72,15 +80,17 @@ namespace Fiorello.Areas.Admin.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Update
         public async Task<IActionResult> Update(int? id)
         {
             ViewBag.Categories = await _db.Categories.ToListAsync();
-            if(id== null)
+            if (id == null)
             {
                 return NotFound();
             }
-            Product dbProduct = await _db.Products.Include(x=>x.ProductDetail).FirstOrDefaultAsync(x => x.Id == id);
+            Product dbProduct = await _db.Products.Include(x => x.ProductDetail).FirstOrDefaultAsync(x => x.Id == id);
             if (dbProduct == null)
             {
                 return BadRequest();
@@ -88,9 +98,13 @@ namespace Fiorello.Areas.Admin.Controllers
 
             return View(dbProduct);
         }
+        #endregion
+
+        #region Update Post
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
+
         public async Task<IActionResult> Update(int? id, Product product, int categoryId)
         {
             ViewBag.Categories = await _db.Categories.ToListAsync();
@@ -98,7 +112,7 @@ namespace Fiorello.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Product dbProduct = await _db.Products.Include(x=>x.ProductDetail).FirstOrDefaultAsync(x => x.Id == id);
+            Product dbProduct = await _db.Products.Include(x => x.ProductDetail).FirstOrDefaultAsync(x => x.Id == id);
             if (dbProduct == null)
             {
                 return BadRequest();
@@ -109,7 +123,7 @@ namespace Fiorello.Areas.Admin.Controllers
             {
                 return View(dbProduct);
             }
-            bool isExist = await _db.Products.AnyAsync(x => x.Name == product.Name&& x.Id!=id);
+            bool isExist = await _db.Products.AnyAsync(x => x.Name == product.Name && x.Id != id);
             if (isExist)
             {
                 ModelState.AddModelError("Name", "Bu Product artiq movcuddur");
@@ -130,7 +144,7 @@ namespace Fiorello.Areas.Admin.Controllers
                 string folder = Path.Combine(_env.WebRootPath, "img");
                 dbProduct.Image = await product.Photo.SaveFileAsync(folder);
             }
-           
+
             dbProduct.CategoryId = categoryId;
             dbProduct.Name = product.Name;
             dbProduct.Price = product.Price;
@@ -138,6 +152,10 @@ namespace Fiorello.Areas.Admin.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        #endregion
+
+        #region Activity
+
         public async Task<IActionResult> Activity(int? id)
         {
             if (id == null)
@@ -160,6 +178,7 @@ namespace Fiorello.Areas.Admin.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        #endregion
 
     }
 }
