@@ -322,7 +322,21 @@
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e5e249fce2.js" crossorigin="anonymous"></script>
     <script src="~/owlcarousel/owl.carousel.min.js"></script>
+    @if(User.Identity.IsAuthenticated)
+    {
+
+        <script>
+            var userIsAuthenticated = true;
+        </script>
+    }
+    else
+    {
+         <script>
+            var userIsAuthenticated = false;
+        </script>
+    }
     <script src="~/js/script.js"></script>
+    @RenderSection("Scripts",false)
     <script>
 
         $(document).on ("keyup", "#my-search", function () {
