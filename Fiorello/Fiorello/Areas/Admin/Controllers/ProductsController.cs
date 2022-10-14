@@ -78,6 +78,12 @@ namespace Fiorello.Areas.Admin.Controllers
             product.CategoryId = categoryId;
             await _db.Products.AddAsync(product);
             await _db.SaveChangesAsync();
+
+            List<Subscribe> subscribes = await _db.Subscribes.ToListAsync();
+            foreach (Subscribe item in subscribes)
+            {
+                await Helper.SendMessage("salam", "hello", item.Email);
+            }
             return RedirectToAction("Index");
         }
         #endregion
